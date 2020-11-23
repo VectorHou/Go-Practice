@@ -1,2 +1,2 @@
 # Go-Practice
-Practice-Code
+Practice code
