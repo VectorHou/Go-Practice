@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Advance/structpk"// when import local package, the name of the package must be lower-case
-	"Advance/syncpk"
+	"advance/structPk"// when import local package, input the module_name/dir_name
+	"advance/syncPk"
 	"fmt"
 )
 func main(){

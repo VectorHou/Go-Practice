@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"os"
+	"github.com/olekukonko/tablewriter"
+)
 
 func main(){
-	fmt.Println("Hello world!")
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader([]string{"A", "B", "C", "D", "E"})
+	table.Render()
 }

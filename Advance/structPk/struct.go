@@ -24,6 +24,7 @@ func Structfunc(){// The first character of the function name must be upper-char
 		},
 		[5]int{1,2,3,4,5},
 	}
+	//DataType.num = 7
 	datatype.GetNum()
 	datatype.AlterNum(66)
 	
