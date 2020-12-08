@@ -13,8 +13,7 @@ type hk int // hk means a new type, but hk has the feature of int
 func main() {
 	fmt.Println("Hello World")
 	aa := []int{1,2,3,4,5,6,7}
-	ab := []int{0,0,0,0,0,0,0}
-	sort.QuickSort(aa, ab)
+	sort.QuickSort(aa)
 	var a h = 10
 	var b int = 26
 	var c float64
