@@ -41,16 +41,16 @@ func InsertionSort(input []int) (res []int, err error){
 	for i := 0; i < len(input); i++{
 		index := i
 		for j := i; j >= 0; j--{
-			count++	
+			count++
 			// fmt.Println(index, j)		
-			if input[index] < input[j]{		
+			if input[index] < input[j]{
 				execount++		
 				tmp := input[j]
 				input[j] = input[index]
 				input[index] = tmp
 				index = j
 				// fmt.Println(input)
-			}			
+			}
 		}
 	}
 	fmt.Println("loop counter:", count, "swap counter:", execount)
@@ -75,7 +75,7 @@ func SelectionSort(input []int) (res []int, err error){
 				minindex = j
 			}
 		}
-		tmp := input[minindex]	
+		tmp := input[minindex]
 		input[minindex] = input[i]
 		input[i] = tmp
 	}
