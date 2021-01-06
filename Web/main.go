@@ -10,6 +10,7 @@ import (
 	"bytes"
 	"errors"
 	"sync"
+	"time"
 )
 
 var (
@@ -104,16 +105,23 @@ func handler(w http.ResponseWriter, r *http.Request){
 func main(){
 	ProductCerts()
 	go BcjServer()
+	time.Sleep(3*time.Second)
 	var sa  = []string{"abc", "bdc", "dc", "ddc", "fbc", "ec"}
-	var output1, output2 []bool
-	output1, _ = BcjClient(sa)
-	fmt.Println("exe result: ", output1)
-	output2, _ = BcjClient(sa)
-	fmt.Println("exe result: ", output2)
+	var output[]bool
+	output, _ = BcjClient(sa)
+	fmt.Println("exe result: ", output)
+	output, _ = BcjClient(sa)
+	fmt.Println("exe result: ", output)
 	var se []string
 	if _, err := BcjClient(se); err != nil {
 		fmt.Println(err)
 	}
 	for{
+		// go func(){
+			// var sa  = []string{"abc", "bdc", "dc", "ddc", "fbc", "ec"}
+			// var output []bool
+			// output, _ = BcjClient(sa)
+			// fmt.Println("exe result: ", output)
+		// }()		
 	}
 }

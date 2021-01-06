@@ -3,6 +3,7 @@ package main
 import(
 	"fmt"
 	"testing"
+	"time"
 	// "net/http/httptest"
 	// "net/http"
 	// "encoding/json"
@@ -15,10 +16,11 @@ func TestClient(t *testing.T){
 		if err.Error() != "the lenth of input []string <= 0!" {		
 			t.Errorf("the error is not expacted and the err is :%s", err.Error())	
 		}else{
-			fmt.Printf("the length of output is actual[%d] expacted[0]", len(output))
+			fmt.Printf("the length of output is actual[%d] expacted[0]\n", len(output))
 		}
 	}
 	go BcjServer()
+	time.Sleep(3*time.Second)
 	var sa = []string{"abc", "bcd", "cde", "def", "abc"}
 	output, err = BcjClient(sa)
 	var expacted = []bool{false, false, false, false, true}
