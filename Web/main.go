@@ -52,12 +52,17 @@ func BcjClient(input []string) (output []bool, err error){
 		}
 
 		req := bytes.NewBuffer([]byte(msg))
-		reqh, _ := http.NewRequest("POST", "https://127.0.0.1:8081", req)
+		reqh, _err := http.NewRequest("POST", "https://127.0.0.1:8081", req)
+		if _err != nil{
+			fmt.Println("http.NetRequest get error:", _err)
+			err = _err
+			return
+		}
 		reqh.Header.Set("Content-type", "application/json")		 
 		client := &http.Client{Transport: tr}
 		resp, er := client.Do(reqh)
 		if er != nil {
-			fmt.Println("Get error:", er)
+			fmt.Println("client.Do Get error:", er)
 			err = er
 			return
 		}
@@ -77,7 +82,11 @@ func BcjServer(){
 }
 
 func handler(w http.ResponseWriter, r *http.Request){
-	body, _ := ioutil.ReadAll(r.Body)
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil{
+		fmt.Println("ioutil.ReadAll Get error:", err)
+		return
+	}
 	var reqs JsonRequest
 	var ress JsonReponse
 	if err := json.Unmarshal(body, &reqs); err == nil{
@@ -93,8 +102,13 @@ func handler(w http.ResponseWriter, r *http.Request){
 			}
 		}
 		lock.Unlock()
-		ret, _ := json.Marshal(ress)
-		fmt.Fprintf(w, string(ret))
+		ret, er := json.Marshal(ress)
+		if er != nil{
+			s := "Can not Marshal result to json" 
+			fmt.Fprintf(w, s)
+		}else{
+			fmt.Fprintf(w, string(ret))
+		}
 	}else{		
 		s := "Can not recongnized the Params: "
 		s = s + string(body)  
@@ -108,10 +122,19 @@ func main(){
 	time.Sleep(3*time.Second)
 	var sa  = []string{"abc", "bdc", "dc", "ddc", "fbc", "ec"}
 	var output[]bool
-	output, _ = BcjClient(sa)
-	fmt.Println("exe result: ", output)
-	output, _ = BcjClient(sa)
-	fmt.Println("exe result: ", output)
+	var err error
+	output, err = BcjClient(sa)
+	if err == nil{
+		fmt.Println("exe result: ", output)
+	}else{
+		fmt.Println("BcjClient get error:", err)
+	}	
+	output, err = BcjClient(sa)
+	if err == nil{
+		fmt.Println("exe result: ", output)
+	}else{
+		fmt.Println("BcjClient get error:", err)
+	}
 	var se []string
 	if _, err := BcjClient(se); err != nil {
 		fmt.Println(err)
