@@ -45,7 +45,7 @@ func main() {
 
 }
 
-func sqr_sum(a int, b int) (ret float64, err string){// func: function keyword; (a int, b int): function argument; (int, int): return type, note golang allow multiple return value
+func sqrSum(a int, b int) (ret float64, err string){// func: function keyword; (a int, b int): function argument; (int, int): return type, note golang allow multiple return value
 	var sum float64 = float64(a + b)
 	if sum > 0{
 		return math.Sqrt( sum ), "sucess"
